@@ -1,0 +1,22 @@
+{
+	"schemaVersion": 1,
+	"id": "miningmod",
+	"version": "${version}",
+	"name": "Better Block Hit Delay",
+	"description": "Adjusts the delay after mining blocks",
+	"authors": [
+		"Me!"
+	],
+	"environment": "*",
+	"mixins": [
+		{
+			"config": "miningmod.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.10",
+		"minecraft": ">=1.19",
+		"java": ">=17"
+	}
+}
