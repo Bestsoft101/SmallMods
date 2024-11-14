@@ -1,0 +1,19 @@
+{
+	"schemaVersion": 1,
+	"id": "reusabletrims",
+	"version": "${version}",
+	"name": "Reusable Trims",
+	"description": "Makes armor trims reusable",
+	"authors": [
+		"Me!"
+	],
+	"license": "CC0-1.0",
+	"environment": "*",
+	"mixins": [
+		"reusabletrims.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"java": ">=17"
+	}
+}
