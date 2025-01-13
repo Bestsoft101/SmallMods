@@ -6,6 +6,8 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public class MiningMod {
 	
+	public static boolean enableHasteEffect = false;
+	
 	public static final boolean INDEV = FabricLoader.getInstance().isDevelopmentEnvironment();
 	
 	public static int getBlockHitDelay(PlayerEntity player, float delta) {
@@ -34,7 +36,7 @@ public class MiningMod {
 	}
 	
 	public static int getHasteLevel(PlayerEntity player) {
-		if(StatusEffectUtil.hasHaste(player)) {
+		if(enableHasteEffect && StatusEffectUtil.hasHaste(player)) {
 			return StatusEffectUtil.getHasteAmplifier(player) + 1;
 		}
 		return 0;
