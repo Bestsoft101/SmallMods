@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "continuousmusic",
+	"version": "${version}",
+	"name": "Continuous Music",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"icon": "assets/template-mod/icon.png",
+	"environment": "*",
+	"entrypoints": {},
+	"mixins": [
+		{
+			"config": "continuousmusic.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

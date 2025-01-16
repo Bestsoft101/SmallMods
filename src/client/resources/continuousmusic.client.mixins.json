@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "b100.continuousmusic.mixin.client",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"MusicTrackerMixin",
+		"SoundSystemMixin",
+		"SourceMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
