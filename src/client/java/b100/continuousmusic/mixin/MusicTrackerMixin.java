@@ -1,4 +1,4 @@
-package b100.continuousmusic.mixin.client;
+package b100.continuousmusic.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -6,14 +6,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import net.minecraft.client.MinecraftClient;
+import b100.continuousmusic.ContinuousMusicMod;
+import b100.continuousmusic.access.MusicTrackerAccess;
 import net.minecraft.client.sound.MusicTracker;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.sound.MusicSound;
-import net.minecraft.sound.SoundCategory;
 
 @Mixin(value = MusicTracker.class)
-public abstract class MusicTrackerMixin {
+public abstract class MusicTrackerMixin implements MusicTrackerAccess {
 	
 	@Shadow
 	private int timeUntilNextSong;
@@ -24,23 +24,7 @@ public abstract class MusicTrackerMixin {
 	private void beforeTick(CallbackInfo ci) {
 		ci.cancel();
 		
-		MinecraftClient mc = MinecraftClient.getInstance();
-		
-		float musicVolume = mc.options.getSoundVolume(SoundCategory.MUSIC);
-		if(musicVolume <= 0.0f) {
-			current = null;
-			return;
-		}
-		
-		if(current != null && !mc.getSoundManager().isPlaying(current)) {
-			current = null;
-		}
-		
-		if(current == null) {
-			MusicSound musicType = mc.getMusicType();
-			
-			play(musicType);
-		}
+		ContinuousMusicMod.tickMusic(this);
 	}
 	
 	@Inject(method = "stop(Lnet/minecraft/sound/MusicSound;)V", at = @At("HEAD"), cancellable = true)
@@ -51,6 +35,16 @@ public abstract class MusicTrackerMixin {
 	@Inject(method = "stop()V", at = @At("HEAD"), cancellable = true)
 	private void onStop(CallbackInfo ci) {
 		ci.cancel();	
+	}
+	
+	@Override
+	public void setCurrent(SoundInstance sound) {
+		current = sound;
+	}
+	
+	@Override
+	public SoundInstance getCurrent() {
+		return current;
 	}
 	
 	@Shadow
