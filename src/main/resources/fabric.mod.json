@@ -1,0 +1,23 @@
+{
+	"schemaVersion": 1,
+	"id": "nonightvisionflicker",
+	"version": "${version}",
+	"name": "No Night Vision Flicker",
+	"description": "No Night Vision Flicker",
+	"authors": [
+		"Me!"
+	],
+	"license": "CC0-1.0",
+	"environment": "*",
+	"mixins": [
+		{
+			"config": "nonightvisionflicker.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": ">=1.15",
+		"java": ">=17"
+	}
+}
