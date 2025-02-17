@@ -3,11 +3,10 @@
 	"id": "continuousmusic",
 	"version": "${version}",
 	"name": "Continuous Music",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "The background music will constantly play and not get interrupted by pausing or loading screens",
 	"authors": [
 		"Me!"
 	],
-	"icon": "assets/template-mod/icon.png",
 	"environment": "client",
 	"entrypoints": {},
 	"mixins": [
@@ -18,9 +17,8 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.16.10",
-		"minecraft": "~1.21.1",
-		"java": ">=21",
-		"fabric-api": "*"
+		"minecraft": ">=1.20 <=1.21.3",
+		"java": ">=21"
 	},
 	"suggests": {
 		"another-mod": "*"
