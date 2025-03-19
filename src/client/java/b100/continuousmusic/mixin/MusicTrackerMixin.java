@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import b100.continuousmusic.ContinuousMusicMod;
 import b100.continuousmusic.access.MusicTrackerAccess;
+import net.minecraft.client.sound.MusicInstance;
 import net.minecraft.client.sound.MusicTracker;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.sound.MusicSound;
@@ -48,6 +49,6 @@ public abstract class MusicTrackerMixin implements MusicTrackerAccess {
 	}
 	
 	@Shadow
-	public abstract void play(MusicSound type);
+	public abstract void play(MusicInstance type);
 	
 }

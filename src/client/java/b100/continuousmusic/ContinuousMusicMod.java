@@ -9,6 +9,7 @@ import b100.continuousmusic.access.MusicTrackerAccess;
 import b100.continuousmusic.access.SoundManagerAccess;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.sound.MusicInstance;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.sound.SoundManager;
 import net.minecraft.registry.RegistryKey;
@@ -45,10 +46,11 @@ public class ContinuousMusicMod {
 		}
 		
 		if(musicTracker.getCurrent() == null) {
-			MusicSound musicType = mc.getMusicType();
+			MusicInstance music = mc.getMusicInstance();
+			MusicSound musicSound = music.music();
 			
-			debug("Play Music: " + ContinuousMusicMod.getName(musicType.getSound()));
-			musicTracker.play(musicType);
+			debug("Play Music: " + ContinuousMusicMod.getName(musicSound.getSound()));
+			musicTracker.play(music);
 		}
 	}
 	

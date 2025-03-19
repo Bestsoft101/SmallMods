@@ -1,7 +1,7 @@
 package b100.continuousmusic.access;
 
+import net.minecraft.client.sound.MusicInstance;
 import net.minecraft.client.sound.SoundInstance;
-import net.minecraft.sound.MusicSound;
 
 public interface MusicTrackerAccess {
 	
@@ -9,6 +9,6 @@ public interface MusicTrackerAccess {
 	
 	public void setCurrent(SoundInstance sound);
 	
-	public void play(MusicSound type);
+	public void play(MusicInstance type);
 	
 }
