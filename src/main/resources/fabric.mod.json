@@ -10,6 +10,11 @@
 	"license": "CC0-1.0",
 	"icon": "assets/fastminecart/icon.png",
 	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"b100.fastminecart.FastMinecartMod"
+		]
+	},
 	"mixins": [
 		"fastminecart.mixins.json"
 	],
