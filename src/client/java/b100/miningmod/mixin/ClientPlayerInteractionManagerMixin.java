@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import b100.miningmod.MiningMod;
@@ -41,6 +42,13 @@ public class ClientPlayerInteractionManagerMixin {
 	private int miningmod_changeBlockHitDelay(int value, BlockPos pos, Direction direction) {
 		float delta = blockBeforeBroken.calcBlockBreakingDelta(this.client.player, this.client.world, pos);
 		return MiningMod.getBlockHitDelay(client.player, delta);
+	}
+	
+	@Inject(method = "cancelBlockBreaking", at = @At("HEAD"))
+	private void onCancelBlockBreaking(CallbackInfo ci) {
+		if(blockBreakingCooldown > 0) {
+			blockBreakingCooldown--;
+		}
 	}
 	
 }
