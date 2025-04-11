@@ -9,10 +9,14 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+
 import b100.miningmod.MiningMod;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
@@ -49,6 +53,17 @@ public class ClientPlayerInteractionManagerMixin {
 		if(blockBreakingCooldown > 0) {
 			blockBreakingCooldown--;
 		}
+	}
+	
+	@WrapOperation(
+		method = "isCurrentlyBreaking",
+		at = @At(
+			value = "INVOKE",
+			target = "Lnet/minecraft/item/ItemStack;areItemsAndComponentsEqual(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)Z"
+		)
+	)
+	private boolean removeBlockBreakReset(ItemStack a, ItemStack b, Operation<Boolean> original) {
+		return true;
 	}
 	
 }
