@@ -23,7 +23,14 @@ public class ContinuousMusicMod {
 	public static final String MODID = "continuousmusic";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 	
+	private static int delay = 0;
+	
 	public static void tickMusic(MusicTrackerAccess musicTracker) {
+		if(delay > 0) {
+			delay--;
+			return;
+		}
+		
 		MinecraftClient mc = MinecraftClient.getInstance();
 		
 		SoundManager soundManager = mc.getSoundManager();
@@ -46,8 +53,23 @@ public class ContinuousMusicMod {
 		}
 		
 		if(musicTracker.getCurrent() == null) {
+			debug("Find new music to play...");
+			
 			MusicInstance music = mc.getMusicInstance();
+			if(music == null) {
+				// Don't know if this can happen
+				debug("MusicInstance is null, no music to play!");
+				delay = 50;
+				return;
+			}
+			
 			MusicSound musicSound = music.music();
+			if(musicSound == null) {
+				// Can happen when a song ends in a pale garden
+				debug("MusicSound is null, no music to play!");
+				delay = 50;
+				return;
+			}
 			
 			debug("Play Music: " + ContinuousMusicMod.getName(musicSound.getSound()));
 			musicTracker.play(music);
