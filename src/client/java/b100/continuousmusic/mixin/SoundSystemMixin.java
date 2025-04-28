@@ -14,6 +14,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 
+import b100.continuousmusic.ContinuousMusicMod;
 import b100.continuousmusic.TickChannelThread;
 import b100.continuousmusic.access.SoundSystemAccess;
 import b100.continuousmusic.access.SourceAccess;
@@ -39,7 +40,10 @@ public class SoundSystemMixin implements SoundSystemAccess {
 		at = @At("TAIL")
 	)
 	private void onInit(SoundManager loader, GameOptions settings, ResourceFactory resourceFactory, CallbackInfo ci) {
-		new TickChannelThread(channel);
+		if(ContinuousMusicMod.ENABLE_TICK_THREAD) {
+			new TickChannelThread(channel);	
+		}
+		ContinuousMusicMod.setChannel(channel);
 	}
 	
 	@ModifyArg(
@@ -65,8 +69,10 @@ public class SoundSystemMixin implements SoundSystemAccess {
 			target = "Lnet/minecraft/client/sound/Channel;tick()V"
 		)
 	)
-	private void dontTickChannel(Channel instance, Operation<Void> operation) {
-		
+	private void dontTickChannel(Channel instance, Operation<Void> original) {
+		if(!ContinuousMusicMod.ENABLE_TICK_THREAD) {
+			original.call(instance);
+		}
 	}
 
 	@Override
