@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "b100.betabiomecolors.mixin.client",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"sodium.LevelColorCacheMixin",
+		"sodium.SliceMixin",
+		"ClientWorldMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

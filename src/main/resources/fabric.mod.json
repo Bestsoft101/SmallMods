@@ -1,0 +1,27 @@
+{
+	"schemaVersion": 1,
+	"id": "betabiomecolors",
+	"version": "${version}",
+	"name": "Beta Biome Colors",
+	"description": "",
+	"authors": [
+		"Me!"
+	],
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"b100.betabiomecolors.BetaBiomeColors"
+		]
+	},
+	"mixins": [
+		{
+			"config": "betabiomecolors.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.13",
+		"minecraft": "~1.21.1",
+		"java": ">=21"
+	}
+}
