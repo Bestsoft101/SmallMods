@@ -3,8 +3,8 @@
 	"package": "b100.betabiomecolors.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"sodium.LevelColorCacheMixin",
-		"sodium.SliceMixin",
+		"sodium.ColorProviderRegistryMixin",
+		"BlockColorsMixin",
 		"ClientWorldMixin"
 	],
 	"injectors": {
