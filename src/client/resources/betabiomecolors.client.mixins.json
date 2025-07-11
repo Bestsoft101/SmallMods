@@ -4,6 +4,7 @@
 	"compatibilityLevel": "JAVA_21",
 	"client": [
 		"sodium.ColorProviderRegistryMixin",
+		"BiomeColorsMixin",
 		"BlockColorsMixin",
 		"ClientWorldMixin"
 	],
