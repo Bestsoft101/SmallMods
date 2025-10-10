@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"package": "b100.moreanimals.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"SpawnHelperMixin",
+		"SpawnGroupMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
