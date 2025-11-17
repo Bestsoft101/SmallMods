@@ -1,6 +1,6 @@
 package b100.betabiomecolors.compat.sodium;
 
-import b100.betabiomecolors.BetaBiomeColors;
+import b100.betabiomecolors.BetaBiomeColorsConfig;
 import net.caffeinemc.mods.sodium.client.model.color.ColorProvider;
 import net.caffeinemc.mods.sodium.client.model.quad.ModelQuadView;
 import net.caffeinemc.mods.sodium.client.world.LevelSlice;
@@ -21,7 +21,7 @@ public class CustomColorProvider implements ColorProvider<BlockState> {
 		int x = pos.getX();
 		int z = pos.getZ();
 		
-		if(BetaBiomeColors.useSodiumLinearInterpolation) {
+		if(BetaBiomeColorsConfig.useSodiumLinearInterpolation) {
 			// TODO This only works on the top face of blocks
 			output[0] = color.getColor(x, z);
 			output[1] = color.getColor(x, z + 1);

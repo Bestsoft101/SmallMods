@@ -1,5 +1,7 @@
 package b100.betabiomecolors;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.Random;
 
 import b100.betabiomecolors.util.ThreadedCache;
@@ -11,16 +13,22 @@ import net.minecraft.world.biome.GrassColors;
 
 public class BetaBiomeColors implements ClientModInitializer {
 	
-	private static boolean sodiumInstalled = false;
+	public static final String MODID = "betabiomecolors";
+	public static final File CONFIG_FOLDER = Paths.get("config").toFile();
+	public static final File CONFIG_FILE = new File(CONFIG_FOLDER, MODID + ".properties");
 	
-	public static boolean useSodiumLinearInterpolation = false;
+	private static boolean sodiumInstalled = false;
 	
 	public static NoiseGeneratorOctaves2 field_4194_e;
 	public static NoiseGeneratorOctaves2 field_4193_f;
 	public static NoiseGeneratorOctaves2 field_4192_g;
 
 	static {
-		setSeed(1619655818957931509L);
+		BetaBiomeColorsConfig.load(CONFIG_FILE);
+		
+		setSeed(BetaBiomeColorsConfig.seed);
+		
+		BetaBiomeColorsConfig.save(CONFIG_FILE);
 	}
 	
 	public static void setSeed(long seed) {
