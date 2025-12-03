@@ -68,8 +68,6 @@ public class BlockColorsMixin implements BlockColorsAccess {
 		}
 		
 //		// Remove sugar cane color
-//		blockColors.registerColorProvider((state, world, pos, tintIndex) -> 0xFFFFFFFF, Blocks.SUGAR_CANE);
-		
 		final BlockColorProvider original = providers.get(Registries.BLOCK.getRawId(Blocks.SUGAR_CANE));
 		blockColors.registerColorProvider((state, world, pos, tintIndex) -> {
 			if(BetaBiomeColorsConfig.modEnabled) {

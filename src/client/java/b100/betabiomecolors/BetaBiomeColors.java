@@ -81,11 +81,6 @@ public class BetaBiomeColors implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		if(FabricLoader.getInstance().isDevelopmentEnvironment()) {
-//			System.out.println("DEBUG MIXIN AUDIT");
-//			MixinEnvironment.getDefaultEnvironment().audit();
-		}
-		
 		sodiumInstalled = FabricLoader.getInstance().isModLoaded("sodium");
 	}
 	
