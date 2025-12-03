@@ -31,8 +31,8 @@ public abstract class ColorProviderRegistryMixin {
 	@Inject(method = "installOverrides", at = @At("TAIL"))
 	private void onInstallOverrides(CallbackInfo ci) {
 		// Get color providers for grass and oak leaves
-		ColorProvider<BlockState> originalGrassColorProvider = blocks.get(Blocks.GRASS_BLOCK);
-		ColorProvider<BlockState> originalFoliageColorProvider = blocks.get(Blocks.OAK_LEAVES);
+		ColorProvider<BlockState> originalGrassColor = blocks.get(Blocks.GRASS_BLOCK);
+		ColorProvider<BlockState> originalFoliageColor = blocks.get(Blocks.OAK_LEAVES);
 		
 		// Find all blocks that use the same color provider
 		List<Block> grassColorBlocks = new ArrayList<Block>();
@@ -40,17 +40,17 @@ public abstract class ColorProviderRegistryMixin {
 		
 		for(Block block : blocks.keySet()) {
 			ColorProvider<BlockState> blockColor = blocks.get(block);
-			if(blockColor == originalGrassColorProvider) {
+			if(blockColor == originalGrassColor) {
 				grassColorBlocks.add(block);
 			}
-			if(blockColor == originalFoliageColorProvider) {
+			if(blockColor == originalFoliageColor) {
 				foliageColorBlocks.add(block);
 			}
 		}
 		
 		// Replace color providers for all those blocks
-		CustomColorProvider customGrassColor = new CustomColorProvider((x, z) -> BetaBiomeColors.getGrassColor(x, z));
-		CustomColorProvider customFoliageColor = new CustomColorProvider((x, z) -> BetaBiomeColors.getFoliageColor(x, z));
+		CustomColorProvider customGrassColor = new CustomColorProvider((x, z) -> BetaBiomeColors.getGrassColor(x, z), originalGrassColor);
+		CustomColorProvider customFoliageColor = new CustomColorProvider((x, z) -> BetaBiomeColors.getFoliageColor(x, z), originalFoliageColor);
 		
 		for(Block block : grassColorBlocks) {
 			blocks.put(block, customGrassColor);

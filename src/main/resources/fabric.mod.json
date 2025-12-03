@@ -11,6 +11,9 @@
 	"entrypoints": {
 		"client": [
 			"b100.betabiomecolors.BetaBiomeColors"
+		],
+		"modmenu": [
+			"b100.betabiomecolors.ModMenuIntegration"
 		]
 	},
 	"mixins": [

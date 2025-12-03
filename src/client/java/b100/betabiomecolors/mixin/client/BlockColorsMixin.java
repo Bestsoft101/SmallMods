@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.llamalad7.mixinextras.sugar.Local;
 
 import b100.betabiomecolors.BetaBiomeColors;
+import b100.betabiomecolors.BetaBiomeColorsConfig;
 import b100.betabiomecolors.util.BlockColorsAccess;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -42,18 +43,40 @@ public class BlockColorsMixin implements BlockColorsAccess {
 			Blocks.OAK_LEAVES, Blocks.JUNGLE_LEAVES, Blocks.ACACIA_LEAVES, Blocks.DARK_OAK_LEAVES, Blocks.VINE, Blocks.MANGROVE_LEAVES
 		};
 		
-		BlockColorProvider newGrassColor = (state, world, pos, tintIndex) -> BetaBiomeColors.getGrassColor(pos);
-		BlockColorProvider newFoliageColor = (state, world, pos, tintIndex) -> BetaBiomeColors.getFoliageColor(pos);
-
+		// Modify grass color
 		for(Block block : grassColorBlocks) {
-			providers.set(newGrassColor, Registries.BLOCK.getRawId(block));
+			final int id = Registries.BLOCK.getRawId(block);
+			final BlockColorProvider original = providers.get(id);
+			providers.set((state, world, pos, tintIndex) -> {
+				if(BetaBiomeColorsConfig.modEnabled) {
+					return BetaBiomeColors.getGrassColor(pos);
+				}
+				return original.getColor(state, world, pos, tintIndex);
+			}, id);
 		}
+		
+		// Modify foliage color
 		for(Block block : foliageColorBlocks) {
-			providers.set(newFoliageColor, Registries.BLOCK.getRawId(block));
+			final int id = Registries.BLOCK.getRawId(block);
+			final BlockColorProvider original = providers.get(id);
+			providers.set((state, world, pos, tintIndex) -> {
+				if(BetaBiomeColorsConfig.modEnabled) {
+					return BetaBiomeColors.getFoliageColor(pos);
+				}
+				return original.getColor(state, world, pos, tintIndex);
+			}, id);
 		}
 		
 //		// Remove sugar cane color
-		blockColors.registerColorProvider((state, world, pos, tintIndex) -> 0xFFFFFFFF, Blocks.SUGAR_CANE);
+//		blockColors.registerColorProvider((state, world, pos, tintIndex) -> 0xFFFFFFFF, Blocks.SUGAR_CANE);
+		
+		final BlockColorProvider original = providers.get(Registries.BLOCK.getRawId(Blocks.SUGAR_CANE));
+		blockColors.registerColorProvider((state, world, pos, tintIndex) -> {
+			if(BetaBiomeColorsConfig.modEnabled) {
+				return 0xFFFFFFFF;
+			}
+			return original.getColor(state, world, pos, tintIndex);
+		}, Blocks.SUGAR_CANE);
 	}
 
 	@Override

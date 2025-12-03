@@ -3,7 +3,8 @@ package b100.betabiomecolors;
 import java.io.File;
 
 public class BetaBiomeColorsConfig {
-	
+
+	public static boolean modEnabled = true;
 	public static long seed = 1619655818957931509L;
 	public static boolean useSodiumLinearInterpolation = false;
 	
@@ -16,7 +17,9 @@ public class BetaBiomeColorsConfig {
 	}
 	
 	public static void parse(String key, String value) {
-		if(key.equals("seed")) {
+		if(key.equals("modEnabled")) {
+			modEnabled = value.equalsIgnoreCase("true");
+		}else if(key.equals("seed")) {
 			seed = Long.parseLong(value);
 		}else if(key.equals("useSodiumLinearInterpolation")) {
 			useSodiumLinearInterpolation = value.equalsIgnoreCase("true");
@@ -26,6 +29,7 @@ public class BetaBiomeColorsConfig {
 	public static void save(File configFile) {
 		StringBuilder str = new StringBuilder();
 
+		str.append("modEnabled:").append(modEnabled).append('\n');
 		str.append("seed:").append(seed).append('\n');
 		str.append("useSodiumLinearInterpolation:").append(useSodiumLinearInterpolation).append('\n');
 		

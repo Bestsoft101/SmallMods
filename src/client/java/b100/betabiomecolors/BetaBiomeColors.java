@@ -5,8 +5,10 @@ import java.nio.file.Paths;
 import java.util.Random;
 
 import b100.betabiomecolors.util.ThreadedCache;
+import b100.lib.client.translate.Translate;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.FoliageColors;
 import net.minecraft.world.biome.GrassColors;
@@ -24,6 +26,8 @@ public class BetaBiomeColors implements ClientModInitializer {
 	public static NoiseGeneratorOctaves2 field_4192_g;
 
 	static {
+		Translate.registerNamespace(MODID);
+		
 		BetaBiomeColorsConfig.load(CONFIG_FILE);
 		
 		setSeed(BetaBiomeColorsConfig.seed);
@@ -83,5 +87,10 @@ public class BetaBiomeColors implements ClientModInitializer {
 		}
 		
 		sodiumInstalled = FabricLoader.getInstance().isModLoaded("sodium");
+	}
+	
+	@SuppressWarnings("resource")
+	public static void reloadChunks() {
+		MinecraftClient.getInstance().worldRenderer.reload();
 	}
 }

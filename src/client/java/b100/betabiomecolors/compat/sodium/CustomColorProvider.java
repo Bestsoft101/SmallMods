@@ -11,13 +11,20 @@ import net.minecraft.util.math.BlockPos.Mutable;
 public class CustomColorProvider implements ColorProvider<BlockState> {
 	
 	public BlockColorProvider color;
+	public ColorProvider<BlockState> original;
 	
-	public CustomColorProvider(BlockColorProvider color) {
+	public CustomColorProvider(BlockColorProvider color, ColorProvider<BlockState> original) {
 		this.color = color;
+		this.original = original;
 	}
 
 	@Override
 	public void getColors(LevelSlice slice, BlockPos pos, Mutable scratchPos, BlockState state, ModelQuadView quad, int[] output) {
+		if(!BetaBiomeColorsConfig.modEnabled) {
+			original.getColors(slice, pos, scratchPos, state, quad, output);
+			return;
+		}
+		
 		int x = pos.getX();
 		int z = pos.getZ();
 		
