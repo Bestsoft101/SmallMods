@@ -39,6 +39,7 @@ public class BetaBiomeColors implements ClientModInitializer {
 		field_4194_e = new NoiseGeneratorOctaves2(new Random(seed * 9871L), 4);
 		field_4193_f = new NoiseGeneratorOctaves2(new Random(seed * 39811L), 4);
 		field_4192_g = new NoiseGeneratorOctaves2(new Random(seed * 543321L), 2);
+		BetaBiomeColorsConfig.seed = seed;
 	}
 	
 	public static int getGrassColor(BlockPos pos) {
