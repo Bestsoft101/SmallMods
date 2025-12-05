@@ -52,21 +52,17 @@ public class ConfigScreen extends GuiScreen implements ActionListener {
 	}
 	
 	public void update() {
-		enableModButton.text = Text.of(Translate.translateIfExists(BetaBiomeColors.MODID + ".option.enableMod") + ": " + booleanString(BetaBiomeColorsConfig.modEnabled));
+		enableModButton.text = Text.of(translate("option.enableMod") + ": " + booleanString(BetaBiomeColorsConfig.modEnabled));
 		
 		if(BetaBiomeColors.isSodiumInstalled()) {
-			linearInterpolationButton.text = Text.of(Translate.translateIfExists(BetaBiomeColors.MODID + ".option.smoothing") + ": " + booleanString(BetaBiomeColorsConfig.useSodiumLinearInterpolation));
+			linearInterpolationButton.text = Text.of(translate("option.smoothing") + ": " + booleanString(BetaBiomeColorsConfig.useSodiumLinearInterpolation));
 			linearInterpolationButton.setClickable(true);
 		}else {
-			linearInterpolationButton.text = Text.of(Translate.translateIfExists(BetaBiomeColors.MODID + ".option.smoothing.no_sodium"));
+			linearInterpolationButton.text = Text.of(translate("option.smoothing.no_sodium"));
 			linearInterpolationButton.setClickable(false);
 		}
 		
-		doneButton.text = Translate.translate(BetaBiomeColors.MODID + ".button.done");
-	}
-	
-	public static String booleanString(boolean val) {
-		return val ? Translate.translateIfExists(BetaBiomeColors.MODID + ".value.on") : Translate.translateIfExists(BetaBiomeColors.MODID + ".value.off");
+		doneButton.text = Text.of(translate("button.done"));
 	}
 
 	@Override
@@ -144,7 +140,7 @@ public class ConfigScreen extends GuiScreen implements ActionListener {
 		super.draw();
 		
 		utils.drawCenteredString(Text.of("Beta Biome Colors"), width / 2, 20, 0xFFFFFF, true);
-		utils.drawString("Seed", seedTextField.posX, seedTextField.posY - 10, 0xFFFFFF, true);
+		utils.drawString(translate("option.seed"), seedTextField.posX, seedTextField.posY - 10, 0xFFFFFF, true);
 	}
 	
 	@Override
@@ -167,6 +163,18 @@ public class ConfigScreen extends GuiScreen implements ActionListener {
 		
 		borderPos1 = x1;
 		borderPos2 = x1 + w;
+	}
+	
+	public static String booleanString(boolean val) {
+		return val ? translate("value.on") : translate("value.off");
+	}
+	
+	public static String translate(String key) {
+		String key2 = "betabiomecolors." + key;
+		if(Translate.translationExists(key2)) {
+			return Translate.translateToString(key2);
+		}
+		return key;
 	}
 	
 }
