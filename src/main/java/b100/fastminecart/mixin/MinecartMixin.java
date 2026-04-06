@@ -5,15 +5,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.vehicle.AbstractMinecartEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
+import net.minecraft.world.level.Level;
 
-@Mixin(value = AbstractMinecartEntity.class)
+@Mixin(value = AbstractMinecart.class)
 public abstract class MinecartMixin extends Entity {
 	
-	public MinecartMixin(EntityType<?> type, World world) {
+	public MinecartMixin(EntityType<?> type, Level world) {
 		super(type, world);
 	}
 
